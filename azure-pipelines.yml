@@ -9,6 +9,10 @@ trigger:
 schedules:
 - cron: "10 * * * *"
   displayName: Hourly build
+  branches:
+    include:
+    - master
+  always: true
 
 pool:
   vmImage: 'ubuntu-latest'
