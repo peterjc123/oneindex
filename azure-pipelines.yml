@@ -18,7 +18,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: curl "https://hiteam-oneindex.azurewebsites.net/"
+- script: curl -so /dev/null -w "%{http_code}" https://hiteam-oneindex.azurewebsites.net/ || true
   displayName: 'Access the website'
 
 - script: |
