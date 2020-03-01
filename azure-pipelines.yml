@@ -6,9 +6,19 @@
 trigger:
 - master
 
+schedules:
+- cron: "10 * * * *"
+  displayName: Hourly build
+
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
 - script: curl "https://hiteam-oneindex.azurewebsites.net/"
   displayName: 'Access the website'
+
+- script: |
+    curl -so /dev/null -w "%{http_code}" -u $VSTS_AUTH https://dev.azure.com/peterjc123 || true
+  displayName: 'Keep pipeline running'
+  env:
+    VSTS_AUTH: $(token)
